@@ -1,0 +1,38 @@
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtualenvs
+venv/
+.venv/
+env/
+ENV/
+
+# Local environment files
+.env
+.env.*
+
+# SQLite DB
+database.db
+*.db
+
+# Node
+node_modules/
+
+# Build / static output
+dist/
+static/dist/
+
+# IDEs
+.vscode/
+.idea/
+.DS_Store
+
+# Logs
+*.log
+
+# Scripts (local helpers)
+scripts/
+
+# Test cache
+.pytest_cache/

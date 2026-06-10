@@ -1,0 +1,63 @@
+  {% extends "layout.html" %}
+  {% block title %}Etusivu{% endblock %}
+  {% block content %}
+  <div class="container-max mx-auto p-4 px-4 sm:px-6 lg:px-8 max-w-2xl">
+    <div class="mb-6">
+      <h2 class="font-semibold mb-2">Hae tuote:</h2>
+      <input type="text" id="searchInput" placeholder="esim: polttoainesäiliön korkki"
+            class="mt-1 block w-full p-2 border border-blue-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+    </div>
+    <div>
+      <h2 class="text-2xl font-semibold mb-2">Tuotteet</h2>
+      <table id="productTable" class="min-w-full border-collapse border border-gray">
+        <thead>
+          <tr>
+            <th class="px-4 py-2 border border-blue-300 text-left text-sm font-extrabold text-gray-900">Nimi</th>
+            <th class="px-4 py-2 border border-blue-300 text-left text-sm font-extrabold text-gray-900">Määrä</th>
+            <th class="px-4 py-2 border border-blue-300 text-left text-sm font-extrabold text-gray-900">Muutos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for product in products %}
+          <tr class="hover:bg-gray-100">
+            <td class="px-4 py-2 border border-blue-300 text-sm text-gray-700">{{ product.name }}</td>
+            <td class="px-4 py-2 border border-blue-300 text-sm text-gray-700">{{ product.amount }} kpl</td>
+            <td class="px-4 py-2 border border-blue-300 text-sm text-gray-700">
+              <form action="/update_amount" method="post" class="inline">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <input type="number" name="new_amount" value="{{ product.amount }}" class="w-16 p-1 border border-blue-300 rounded-md">
+                <button type="submit" class="ml-2 text-blue-500 hover:underline">Tallenna</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('searchInput');
+      const productTable = document.getElementById('productTable');
+      const productRows = productTable.querySelectorAll('tbody tr');
+
+      searchInput.addEventListener('keyup', function() {
+        const query = searchInput.value.toLowerCase().trim();
+
+        productRows.forEach((row) => {
+          const nameCell = row.querySelector('td:nth-child(1)');
+          if (nameCell) {
+            const productName = nameCell.textContent.toLowerCase();
+            if (productName.includes(query)) {
+              row.style.display = '';
+            } else {
+              row.style.display = 'none';
+            }
+          }
+        });
+      });
+    });
+  </script>
+  {% endblock %}
