@@ -5,9 +5,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = getenv("SECRET_KEY")
 
-import routes
+secret_key = getenv("SECRET_KEY")
+if not secret_key:
+    raise RuntimeError("SECRET_KEY environment variable is required")
+
+app.secret_key = secret_key
 
 # inject csrf_token() into templates and enforce auth+CSRF before requests
 from flask import redirect, request
