@@ -12,6 +12,8 @@ if not secret_key:
 
 app.secret_key = secret_key
 
+import routes
+
 # inject csrf_token() into templates and enforce auth+CSRF before requests
 from flask import redirect, request
 import user
