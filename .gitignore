@@ -21,7 +21,6 @@ node_modules/
 
 # Build / static output
 dist/
-static/dist/
 
 # IDEs
 .vscode/
