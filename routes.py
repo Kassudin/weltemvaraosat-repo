@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, flash
 import user
 import products
 
@@ -18,7 +18,8 @@ def login():
         if user.login(username, password):
             return redirect("/")
         else:
-            return render_template("error.html", message="Väärä tunnus tai salasana")
+            flash('väärä käyttäjänimi tai salasana')
+            return redirect('/login')
 
 @app.route("/logout")
 def logout():

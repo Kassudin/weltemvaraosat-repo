@@ -1,5 +1,5 @@
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY,
     username TEXT,
     password TEXT
 );
@@ -10,8 +10,8 @@ CREATE TABLE products (
     amount INTEGER NOT NULL
 );
 
-
-INSERT INTO users (username, password) VALUES ('XaPota', 'scrypt:32768:8:1$SAsGarfZzJqWEniE$de5ae17c0683a98ffdb26527a7d666b98225c701860893b9c8b38a4b01a8a3a2915053cc3ac677c084a68d976b27222b256c696659daeb0bd3cc46b07432ac87'); 
+-- Use `create_admin.py` or a migration/seed step
+-- to create or update admin accounts during setup/deployment.
 INSERT INTO products (name, amount) VALUES ('polttoainesäiliön korkki', 4);
 INSERT INTO products (name, amount) VALUES ('kallistuksen tunnistamisanturi uusi ', 10);
 INSERT INTO products (name, amount) VALUES ('kallistuksen tunnistamisanturi vanha', 8);
