@@ -19,9 +19,6 @@ database.db
 # Node
 node_modules/
 
-# Build / static output
-dist/
-
 # IDEs
 .vscode/
 .idea/
